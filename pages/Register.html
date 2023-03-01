@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+  </head>
+  <body>
+    <div class="formContainer">
+      <div class="formWrapper">
+        <span class="logo">Simple Chat</span>
+        <span class="title">Register</span>
+        <form onSubmit="{handleSubmit}">
+          <input required type="text" placeholder="Display name" />
+          <input required type="email" placeholder="Enter email" />
+          <input required type="password" placeholder="Enter password" />
+          <input required type="file" id="file" />
+          <label htmlFor="file">
+            <img src="" alt="" />
+            <span>Add an avatar</span>
+          </label>
+          <button>Sign up</button>
+        </form>
+        <p>You have an account? <a href="/" onclick="route()">Login</a></p>
+      </div>
+    </div>
+  </body>
+</html>
