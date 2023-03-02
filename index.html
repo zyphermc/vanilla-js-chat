@@ -11,7 +11,13 @@
     <div id="root">
       <div id="main-page"></div>
     </div>
-    <script type="module" src="firebase.js"></script>
-    <script src="router.js"></script>
+
+    <script>
+      window.onload = () => {
+        window.location.href = "/pages/Login.html";
+      };
+    </script>
+
+    <script type="module" src="/js/firebase.js"></script>
   </body>
 </html>

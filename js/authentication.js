@@ -1,0 +1,60 @@
+import { auth, db, storage } from "./firebase.js";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+import {
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-storage.js";
+import {
+  doc,
+  setDoc,
+} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+
+export const registerUser = async () => {
+  const displayName = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const file = document.getElementById("file").value;
+
+  console.log(displayName);
+  console.log(email);
+  console.log(password);
+
+  try {
+    //Create user
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    console.log(res);
+    //Create a unique image name
+    const date = new Date().getTime();
+    const storageRef = ref(storage, `${displayName + date}`);
+
+    await uploadBytesResumable(storageRef, file).then(() => {
+      getDownloadURL(storageRef).then(async (downloadURL) => {
+        try {
+          //Update profile
+          await updateProfile(res.user, {
+            displayName,
+            photoURL: downloadURL,
+          });
+          //create user on firestore
+          await setDoc(doc(db, "users", res.user.uid), {
+            uid: res.user.uid,
+            displayName,
+            email,
+            photoURL: downloadURL,
+          });
+
+          await setDoc(doc(db, "userChats", res.user.uid), {});
+          console.log("successfully registered");
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
