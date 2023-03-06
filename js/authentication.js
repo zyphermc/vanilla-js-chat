@@ -4,6 +4,7 @@ import {
   updateProfile,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 import {
   ref,
@@ -86,3 +87,16 @@ export const logoutUser = async () => {
     console.log(err);
   }
 };
+
+export const getUser = async () => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const uid = user.uid;
+      console.log(uid);
+    } else {
+      console.log("no user signed in");
+    }
+  });
+};
+
+

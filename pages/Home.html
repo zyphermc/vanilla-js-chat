@@ -14,7 +14,11 @@
           <div class="navbar">
             <span class="logo">Simple Chat</span>
             <div class="user">
-              <img id="user-image" src="https://www.w3schools.com/images/lamp.jpg" alt="" />
+              <img
+                id="user-image"
+                src="https://www.w3schools.com/images/lamp.jpg"
+                alt=""
+              />
               <span id="user-name">John</span>
               <button id="logout">Logout</button>
             </div>
@@ -85,8 +89,8 @@
     </div>
   </body>
   <script type="module">
-    import { logoutUser } from "../js/authentication.js";
-
+    import { logoutUser, getUser } from "../js/authentication.js";
+    getUser()
     document.getElementById("logout").addEventListener(
       "click",
       function (e) {
