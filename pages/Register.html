@@ -31,18 +31,18 @@
         <p>You have an account? <a href="Login.html">Login</a></p>
       </div>
     </div>
+    <script type="module">
+      import { registerUser } from "../js/authentication.js";
+  
+      document.getElementById("submit").addEventListener(
+        "click",
+        function (e) {
+          e.preventDefault();
+          registerUser();
+          return false;
+        },
+        false
+      );
+    </script>
   </body>
-  <script type="module">
-    import { registerUser } from "../js/authentication.js";
-
-    document.getElementById("submit").addEventListener(
-      "click",
-      function (e) {
-        e.preventDefault();
-        registerUser();
-        return false;
-      },
-      false
-    );
-  </script>
 </html>

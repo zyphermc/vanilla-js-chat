@@ -23,18 +23,19 @@
         </p>
       </div>
     </div>
+    <script type="module">
+      import { loginUser } from "../js/authentication.js";
+      
+      document.getElementById("submit").addEventListener(
+        "click",
+        function (e) {
+          e.preventDefault();
+          loginUser();
+          return false;
+        },
+        false
+      );
+    </script>
   </body>
-  <script type="module">
-    import { loginUser, getUser } from "../js/authentication.js";
-    getUser();
-    document.getElementById("submit").addEventListener(
-      "click",
-      function (e) {
-        e.preventDefault();
-        loginUser();
-        return false;
-      },
-      false
-    );
-  </script>
+  
 </html>

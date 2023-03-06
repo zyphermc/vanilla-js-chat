@@ -87,18 +87,19 @@
         </div>
       </div>
     </div>
+    <script type="module">
+      import { logoutUser, getUser } from "../js/authentication.js";
+
+      document.getElementById("logout").addEventListener(
+        "click",
+        function (e) {
+          e.preventDefault();
+          //logoutUser();
+          getUser();
+          return false;
+        },
+        false
+      );
+    </script>
   </body>
-  <script type="module">
-    import { logoutUser, getUser } from "../js/authentication.js";
-    getUser()
-    document.getElementById("logout").addEventListener(
-      "click",
-      function (e) {
-        e.preventDefault();
-        logoutUser();
-        return false;
-      },
-      false
-    );
-  </script>
 </html>

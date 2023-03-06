@@ -52,6 +52,7 @@ export const registerUser = async () => {
 
           await setDoc(doc(db, "userChats", res.user.uid), {});
           console.log("successfully registered");
+          window.location.href = "/pages/Login.html";
         } catch (err) {
           console.log(err);
         }
@@ -88,15 +89,19 @@ export const logoutUser = async () => {
   }
 };
 
-export const getUser = async () => {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      console.log(uid);
-    } else {
-      console.log("no user signed in");
-    }
-  });
+var currentUser = "asd";
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const uid = user.uid;
+    currentUser = user;
+  } else {
+    console.log("no user signed in");
+  }
+});
+
+console.log(currentUser);
+
+export const getUser = () => {
+  console.log(currentUser);
 };
-
-
