@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   signInWithEmailAndPassword,
+  signOut,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 import {
   ref,
@@ -71,6 +72,16 @@ export const loginUser = async () => {
     await signInWithEmailAndPassword(auth, email, password);
     console.log("successfully logged in");
     window.location.href = "/pages/Home.html";
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const logoutUser = async () => {
+  try {
+    signOut(auth);
+    console.log("logged out");
+    window.location.href = "/pages/Login.html";
   } catch (err) {
     console.log(err);
   }

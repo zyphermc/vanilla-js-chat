@@ -16,7 +16,7 @@
             <div class="user">
               <img id="user-image" src="https://www.w3schools.com/images/lamp.jpg" alt="" />
               <span id="user-name">John</span>
-              <button><a href="Login.html">Logout</a></button>
+              <button id="logout">Logout</button>
             </div>
           </div>
           <div class="search">
@@ -84,4 +84,17 @@
       </div>
     </div>
   </body>
+  <script type="module">
+    import { logoutUser } from "../js/authentication.js";
+
+    document.getElementById("logout").addEventListener(
+      "click",
+      function (e) {
+        e.preventDefault();
+        logoutUser();
+        return false;
+      },
+      false
+    );
+  </script>
 </html>
