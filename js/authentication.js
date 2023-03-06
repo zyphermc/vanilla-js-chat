@@ -2,6 +2,7 @@ import { auth, db, storage } from "./firebase.js";
 import {
   createUserWithEmailAndPassword,
   updateProfile,
+  signInWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 import {
   ref,
@@ -54,6 +55,22 @@ export const registerUser = async () => {
         }
       });
     });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const loginUser = async () => {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  console.log(email);
+  console.log(password);
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    console.log("successfully logged in");
+    window.location.href = "/pages/Home.html";
   } catch (err) {
     console.log(err);
   }

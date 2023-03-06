@@ -13,9 +13,9 @@
         <span class="logo">Simple Chat</span>
         <span class="title">Login</span>
         <form>
-          <input type="email" placeholder="Enter email" />
-          <input type="password" placeholder="Enter password" />
-          <button><a href="Home.html">Sign in</a></button>
+          <input id="email" type="email" placeholder="Enter email" />
+          <input id="password" type="password" placeholder="Enter password" />
+          <button id="submit">Sign in</button>
         </form>
         <p>
           You don't have an account?
@@ -24,5 +24,17 @@
       </div>
     </div>
   </body>
-  <script type="module" src="/js/login.js"></script>
+  <script type="module">
+    import { loginUser } from "../js/authentication.js";
+
+    document.getElementById("submit").addEventListener(
+      "click",
+      function (e) {
+        e.preventDefault();
+        loginUser();
+        return false;
+      },
+      false
+    );
+  </script>
 </html>
