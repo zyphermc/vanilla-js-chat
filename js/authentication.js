@@ -16,18 +16,14 @@ import {
   setDoc,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
 
-export const registerUser = async () => {
-  const displayName = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const file = document.getElementById("file").value;
-
+export const registerUser = async (displayName, email, password, file) => {
   console.log(displayName);
   console.log(email);
   console.log(password);
 
   try {
     //Create user
+    // #### TO DO: Add validation
     const res = await createUserWithEmailAndPassword(auth, email, password);
     console.log(res);
     //Create a unique image name
@@ -51,22 +47,19 @@ export const registerUser = async () => {
           });
 
           await setDoc(doc(db, "userChats", res.user.uid), {});
-          console.log("successfully registered");
-          window.location.href = "/pages/Login.html";
         } catch (err) {
           console.log(err);
         }
       });
     });
+    console.log("successfully registered");
+    window.location.href = "/pages/Login.html";
   } catch (err) {
     console.log(err);
   }
 };
 
-export const loginUser = async () => {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
+export const loginUser = async (email, password) => {
   console.log(email);
   console.log(password);
 
@@ -89,7 +82,7 @@ export const logoutUser = async () => {
   }
 };
 
-var currentUser = "asd";
+var currentUser = "";
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -100,8 +93,8 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-console.log(currentUser);
+console.log(`Current user: ${currentUser}`);
 
 export const getUser = () => {
-  console.log(currentUser);
+  console.log(`Current user: ${currentUser}`);
 };

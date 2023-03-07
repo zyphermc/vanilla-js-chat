@@ -1,0 +1,1 @@
+//current messages in current contact

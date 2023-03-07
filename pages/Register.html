@@ -5,44 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
-    <link rel="stylesheet" href="../style.css" />
+    <script type="module" src="/components/register-form.js"></script>
   </head>
   <body>
-    <div class="formContainer">
-      <div class="formWrapper">
-        <span class="logo">Simple Chat</span>
-        <span class="title">Register</span>
-        <form id="register" onsubmit="return false">
-          <input required id="name" type="text" placeholder="Display name" />
-          <input required id="email" type="email" placeholder="Enter email" />
-          <input
-            required
-            id="password"
-            type="password"
-            placeholder="Enter password"
-          />
-          <input required type="file" id="file" accept="image/*" />
-          <label for="file">
-            <img src="https://www.w3schools.com/images/lamp.jpg" alt="" />
-            <span>Add an avatar</span>
-          </label>
-          <button id="submit">Sign up</button>
-        </form>
-        <p>You have an account? <a href="Login.html">Login</a></p>
-      </div>
-    </div>
-    <script type="module">
-      import { registerUser } from "../js/authentication.js";
-  
-      document.getElementById("submit").addEventListener(
-        "click",
-        function (e) {
-          e.preventDefault();
-          registerUser();
-          return false;
-        },
-        false
-      );
-    </script>
+    <register-form></register-form>
   </body>
 </html>
