@@ -4,7 +4,6 @@ import {
   updateProfile,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 import {
   ref,
@@ -47,13 +46,14 @@ export const registerUser = async (displayName, email, password, file) => {
           });
 
           await setDoc(doc(db, "userChats", res.user.uid), {});
+
+          console.log("successfully registered");
+          window.location.href = "/pages/Login.html";
         } catch (err) {
           console.log(err);
         }
       });
     });
-    console.log("successfully registered");
-    window.location.href = "/pages/Login.html";
   } catch (err) {
     console.log(err);
   }
@@ -80,21 +80,4 @@ export const logoutUser = async () => {
   } catch (err) {
     console.log(err);
   }
-};
-
-var currentUser = "";
-
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    const uid = user.uid;
-    currentUser = user;
-  } else {
-    console.log("no user signed in");
-  }
-});
-
-console.log(`Current user: ${currentUser}`);
-
-export const getUser = () => {
-  console.log(`Current user: ${currentUser}`);
 };

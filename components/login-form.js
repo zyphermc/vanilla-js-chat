@@ -119,8 +119,8 @@ class LoginForm extends HTMLElement {
     //
   }
 
-  on_click(ev) {
-    ev.preventDefault();
+  on_click(e) {
+    e.preventDefault();
 
     const email = this.shadowRoot.getElementById("email").value;
     const password = this.shadowRoot.getElementById("password").value;

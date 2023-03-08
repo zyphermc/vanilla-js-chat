@@ -127,14 +127,14 @@ class RegisterForm extends HTMLElement {
     //
   }
 
-  on_click(ev) {
-    ev.preventDefault();
+  on_click(e) {
+    e.preventDefault();
 
     const name = this.shadowRoot.getElementById("name").value;
     const email = this.shadowRoot.getElementById("email").value;
     const password = this.shadowRoot.getElementById("password").value;
-    const file = this.shadowRoot.getElementById("file").value;
-
+    const file = this.shadowRoot.getElementById("file").files[0];
+    
     registerUser(name,email, password, file);
   }
 }

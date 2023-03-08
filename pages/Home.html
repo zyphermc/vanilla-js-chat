@@ -5,101 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link rel="stylesheet" href="../style.css" />
+    <script type="module" src="/components/home-page.js"></script>
+
+    <style>
+      body {
+        background-color: #a7bcff;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
   </head>
   <body>
-    <div class="home">
-      <div class="container">
-        <div class="sidebar">
-          <div class="navbar">
-            <span class="logo">Simple Chat</span>
-            <div class="user">
-              <img
-                id="user-image"
-                src="https://www.w3schools.com/images/lamp.jpg"
-                alt=""
-              />
-              <span id="user-name">John</span>
-              <button id="logout">Logout</button>
-            </div>
-          </div>
-          <div class="search">
-            <div class="searchForm">
-              <input type="text" placeholder="Find a user" />
-            </div>
-
-            <div class="userChat">
-              <img src="https://www.w3schools.com/images/lamp.jpg" alt="" />
-              <div class="userChatInfo">
-                <span>Search result</span>
-              </div>
-            </div>
-          </div>
-          <div class="userChat">
-            <img src="https://www.w3schools.com/images/lamp.jpg" alt="" />
-            <div class="userChatInfo">
-              <span>Chat History Contacts</span>
-            </div>
-          </div>
-        </div>
-        <div class="chat">
-          <div class="chatInfo">
-            <span>Doe</span>
-            <div class="chatIcons">
-              <img src="https://www.w3schools.com/images/lamp.jpg" alt="" />
-              <img src="https://www.w3schools.com/images/lamp.jpg" alt="" />
-              <img src="https://www.w3schools.com/images/lamp.jpg" alt="" />
-            </div>
-          </div>
-          <div class="messages">
-            <div class="message">
-              <div class="messageInfo">
-                <img src="https://www.w3schools.com/images/lamp.jpg" alt="" />
-                <span>just now</span>
-              </div>
-              <div class="messageContent">
-                <p>Message Text</p>
-                <img src="" alt="" />
-              </div>
-            </div>
-            <div class="message owner">
-              <div class="messageInfo">
-                <img src="https://www.w3schools.com/images/lamp.jpg" alt="" />
-                <span>just now</span>
-              </div>
-              <div class="messageContent">
-                <p>Message Text</p>
-                <img src="" alt="" />
-              </div>
-            </div>
-          </div>
-          <div class="input">
-            <input type="text" placeholder="Type something..." />
-            <div class="send">
-              <img src="https://www.w3schools.com/images/lamp.jpg" alt="" />
-              <input type="file" id="file" />
-              <label htmlFor="file">
-                <img src="https://www.w3schools.com/images/lamp.jpg" alt="" />
-              </label>
-              <button>Send</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script type="module">
-      import { logoutUser, getUser } from "../js/authentication.js";
-
-      document.getElementById("logout").addEventListener(
-        "click",
-        function (e) {
-          e.preventDefault();
-          logoutUser();
-          //getUser();
-          return false;
-        },
-        false
-      );
-    </script>
+    <home-page></home-page>
   </body>
 </html>
