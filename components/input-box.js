@@ -68,8 +68,6 @@ export class InputBox extends HTMLElement {
   }
 
   connectedCallback() {
-    console.log("input box connected");
-
     const sendBtn = this.shadowRoot.getElementById("submit");
 
     if (sendBtn) {

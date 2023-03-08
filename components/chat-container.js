@@ -31,7 +31,7 @@ export class ChatContainer extends HTMLElement {
     }
     </style>
 
-    <div class="chat">
+    <div id="chat-container" class="chat">
         <div class="chatInfo">
             <span>Recipient Name</span>
             <div class="chatIcons">
@@ -51,9 +51,7 @@ export class ChatContainer extends HTMLElement {
     this.controller = new AbortController();
   }
 
-  connectedCallback() {
-    console.log("chat-container connected");
-  }
+  connectedCallback() {}
 
   disconnectedCallback() {
     this.controller.abort();

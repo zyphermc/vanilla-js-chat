@@ -72,9 +72,7 @@ export class SearchBox extends HTMLElement {
     this.controller = new AbortController();
   }
 
-  connectedCallback() {
-    console.log("search box connected");
-  }
+  connectedCallback() {}
 
   disconnectedCallback() {
     this.controller.abort();

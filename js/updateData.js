@@ -11,7 +11,7 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
     currentUser = user;
-    console.log(user);
+    //console.log(user);
   } else {
     console.log("no user signed in");
   }

@@ -60,10 +60,7 @@ export class NavBar extends HTMLElement {
   }
 
   connectedCallback() {
-    console.log("navbar connected");
-
     const logoutBtn = this.shadowRoot.getElementById("submit");
-    const getUserBtn = this.shadowRoot.getElementById("get-user");
     const elName = this.shadowRoot.getElementById("user-name");
     const elImage = this.shadowRoot.getElementById("user-image");
 
@@ -72,11 +69,10 @@ export class NavBar extends HTMLElement {
         signal: this.controller.signal,
       });
     }
-    
-    if(elName && elImage){
-      updateUserDetails(elName, elImage);
+
+    if (elName && elImage) {
+      //updateUserDetails(elName, elImage);
     }
-    
   }
 
   disconnectedCallback() {

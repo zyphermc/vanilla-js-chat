@@ -43,9 +43,7 @@ class Home extends HTMLElement {
     this.controller = new AbortController();
   }
 
-  connectedCallback() {
-    console.log("home connected");
-  }
+  connectedCallback() {}
 
   disconnectedCallback() {
     this.controller.abort();

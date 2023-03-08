@@ -71,19 +71,13 @@ export class MessageInfo extends HTMLElement {
     this.controller = new AbortController();
   }
 
-  static get observedAttributes() {
-    return ["data-message", "data-owner"];
-  }
-
   connectedCallback() {
-    console.log("message info connected");
-
     const el = this.shadowRoot.getElementById("owner-message");
     const container = this.shadowRoot.getElementById("message-container");
 
     if (el && container) {
-      el.innerText = this.getAttribute("data-message");
-      this.getAttribute("data-owner") == "true"
+      el.innerText = this.getAttribute("message");
+      this.getAttribute("owner") == "true"
         ? container.classList.add("owner")
         : "";
     }
@@ -93,7 +87,9 @@ export class MessageInfo extends HTMLElement {
     this.controller.abort();
   }
 
-  attributeChangedCallback(name, newValue, oldValue) {}
+  attributeChangedCallback(name, oldValue, newValue) {
+    console.log(`${name},${oldValue},${newValue}`);
+  }
 }
 
 if (

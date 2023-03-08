@@ -18,8 +18,9 @@ export class MessageList extends HTMLElement {
 
 
     <div class="messages">
-        <message-info data-message="Hello World" data-owner="true"></message-info>
-        <message-info data-message="Foobar" data-owner="false"></message-info>
+        <message-info message="Hello World" owner="true"></message-info>
+        <message-info message="Foobar" owner="false"></message-info>
+        <button id="submit">Add Message</button>
     </div>
       `;
 
@@ -29,16 +30,37 @@ export class MessageList extends HTMLElement {
     this.controller = new AbortController();
   }
 
+  static get observedAttributes() {
+    return [];
+  }
+
   connectedCallback() {
-    console.log("message list connected");
+    const el = this.shadowRoot.getElementById("submit");
+
+    if (el) {
+      el.addEventListener("click", this.on_click.bind(this), {
+        signal: this.controller.signal,
+      });
+    }
   }
 
   disconnectedCallback() {
     this.controller.abort();
   }
 
-  attributeChangedCallback(name, newValue, oldValue) {
-    //
+  attributeChangedCallback(name, oldValue, newValue) {}
+
+  on_click(e) {
+    e.preventDefault();
+    this.addMessage("hello", "true");
+  }
+
+  addMessage(message, owner) {
+    const myMessage = document.createElement("message-info");
+    myMessage.setAttribute("message", message);
+    myMessage.setAttribute("owner", owner);
+
+    this.shadowRoot.querySelector(".messages").appendChild(myMessage);
   }
 }
 

@@ -51,9 +51,7 @@ export class ChatList extends HTMLElement {
     this.controller = new AbortController();
   }
 
-  connectedCallback() {
-    console.log("chat list connected");
-  }
+  connectedCallback() {}
 
   disconnectedCallback() {
     this.controller.abort();

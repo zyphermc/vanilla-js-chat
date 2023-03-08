@@ -36,9 +36,7 @@ export class Sidebar extends HTMLElement {
     this.controller = new AbortController();
   }
 
-  connectedCallback() {
-    console.log("sidebar connected");
-  }
+  connectedCallback() {}
 
   disconnectedCallback() {
     this.controller.abort();
