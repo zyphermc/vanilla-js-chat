@@ -94,19 +94,21 @@ export class InputBox extends HTMLElement {
   handleSend() {
     const input = this.shadowRoot.getElementById("text-input");
 
-    if (input) {
-      this.findContactList().setAttribute("timestamp", new Date().getTime());
-      this.findContactList().setAttribute("last-message", input.value);
+    input
+      ? () => {
+          this.findContactList().setAttribute(
+            "timestamp",
+            new Date().getTime()
+          );
+          this.findContactList().setAttribute("last-message", input.value);
 
-      pushMessage(this.getAttribute("contact-id"), input.value, true);
+          pushMessage(this.getAttribute("contact-id"), input.value, true);
 
-      this.previousElementSibling.addMessageElement(
-        input.value,
-        true
-      );
+          this.previousElementSibling.addMessageElement(input.value, true);
 
-      input.value = "";
-    }
+          input.value = "";
+        }
+      : console.log("input not found");
   }
 
   findContactList() {

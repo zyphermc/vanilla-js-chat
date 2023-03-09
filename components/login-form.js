@@ -100,22 +100,20 @@ class LoginForm extends HTMLElement {
   }
 
   connectedCallback() {
-    console.log("login connected");
-
     const el = this.shadowRoot.getElementById("submit");
 
-    if (el) {
-      el.addEventListener("click", this.on_click.bind(this), {
-        signal: this.controller.signal,
-      });
-    }
+    el
+      ? el.addEventListener("click", this.on_click.bind(this), {
+          signal: this.controller.signal,
+        })
+      : console.log("login button not found");
   }
 
   disconnectedCallback() {
     this.controller.abort();
   }
 
-  attributeChangedCallback(name, newValue, oldValue) {
+  attributeChangedCallback(name, oldValue, newValue) {
     //
   }
 
@@ -130,4 +128,4 @@ class LoginForm extends HTMLElement {
 }
 
 if (document.createElement("login-form").constructor.__proto__ !== HTMLElement)
-window.customElements.define("login-form", LoginForm);
+  window.customElements.define("login-form", LoginForm);

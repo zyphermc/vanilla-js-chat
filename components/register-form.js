@@ -112,11 +112,11 @@ class RegisterForm extends HTMLElement {
 
     const el = this.shadowRoot.getElementById("submit");
 
-    if (el) {
-      el.addEventListener("click", this.on_click.bind(this), {
-        signal: this.controller.signal,
-      });
-    }
+    el
+      ? el.addEventListener("click", this.on_click.bind(this), {
+          signal: this.controller.signal,
+        })
+      : console.log("submit button not found");
   }
 
   disconnectedCallback() {
@@ -134,13 +134,12 @@ class RegisterForm extends HTMLElement {
     const email = this.shadowRoot.getElementById("email").value;
     const password = this.shadowRoot.getElementById("password").value;
     const file = this.shadowRoot.getElementById("file").files[0];
-    
-    registerUser(name,email, password, file);
+
+    registerUser(name, email, password, file);
   }
 }
 
-if (document.createElement("register-form").constructor.__proto__ !== HTMLElement)
+if (
+  document.createElement("register-form").constructor.__proto__ !== HTMLElement
+)
   window.customElements.define("register-form", RegisterForm);
-
-
-

@@ -54,12 +54,16 @@ export class MessageHeader extends HTMLElement {
     this.controller.abort();
   }
 
-  attributeChangedCallback(attr, newValue, oldValue) {
+  attributeChangedCallback(attr, oldValue, newValue) {
     if (oldValue === newValue) return;
 
     if (attr === "contact-id") {
-        const headerName = this.shadowRoot.querySelector("#header-name");
-        headerName.innerHTML = getData()[this.getAttribute("contact-id")].name;
+      const headerName = this.shadowRoot.querySelector("#header-name");
+
+      headerName
+        ? (headerName.innerHTML =
+            getData()[this.getAttribute("contact-id")].name)
+        : console.log("header element not found");
     }
   }
 }

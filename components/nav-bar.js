@@ -60,8 +60,8 @@ export class NavBar extends HTMLElement {
 
   connectedCallback() {
     const logoutBtn = this.shadowRoot.getElementById("submit");
-    const elName = this.shadowRoot.getElementById("user-name");
-    const elImage = this.shadowRoot.getElementById("user-image");
+    // const elName = this.shadowRoot.getElementById("user-name");
+    // const elImage = this.shadowRoot.getElementById("user-image");
 
     if (logoutBtn) {
       logoutBtn.addEventListener("click", this.handleLogout.bind(this), {

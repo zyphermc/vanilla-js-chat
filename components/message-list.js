@@ -46,10 +46,14 @@ export class MessageList extends HTMLElement {
       const messages = getData()[this.getAttribute("contact-id")].messages;
 
       const el = this.shadowRoot.querySelector(".messages");
-      el.innerHTML = "";
 
-      for (let a = 0; a < messages.length; a++) {
-        this.addMessageElement(messages[a].message, messages[a].owner);
+      //clear sample messages
+      el ? (el.innerHTML = "") : console.log("messages not found");
+
+      if (messages.length > 0) {
+        for (let a = 0; a < messages.length; a++) {
+          this.addMessageElement(messages[a].message, messages[a].owner);
+        }
       }
     }
   }
