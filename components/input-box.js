@@ -69,9 +69,9 @@ export class InputBox extends HTMLElement {
     this.controller = new AbortController();
   }
 
-  // static get observedAttributes() {
-  //   return ["contact-id"];
-  // }
+  static get observedAttributes() {
+    return ["contact-id"];
+  }
 
   connectedCallback() {
     const sendBtn = this.shadowRoot.getElementById("submit");
@@ -94,21 +94,16 @@ export class InputBox extends HTMLElement {
   handleSend() {
     const input = this.shadowRoot.getElementById("text-input");
 
-    input
-      ? () => {
-          this.findContactList().setAttribute(
-            "timestamp",
-            new Date().getTime()
-          );
-          this.findContactList().setAttribute("last-message", input.value);
+    if (input) {
+      this.findContactList().setAttribute("timestamp", new Date().getTime());
+      this.findContactList().setAttribute("last-message", input.value);
 
-          pushMessage(this.getAttribute("contact-id"), input.value, true);
+      pushMessage(this.getAttribute("contact-id"), input.value, true);
 
-          this.previousElementSibling.addMessageElement(input.value, true);
+      this.previousElementSibling.addMessageElement(input.value, true);
 
-          input.value = "";
-        }
-      : console.log("input not found");
+      input.value = "";
+    }
   }
 
   findContactList() {

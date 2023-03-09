@@ -123,7 +123,7 @@ class RegisterForm extends HTMLElement {
     this.controller.abort();
   }
 
-  attributeChangedCallback(name, newValue, oldValue) {
+  attributeChangedCallback(name, oldValue, newValue) {
     //
   }
 

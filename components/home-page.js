@@ -53,7 +53,7 @@ class HomePage extends HTMLElement {
           </div>
         </div>
         <div class="chat">
-          <message-header contact-id="0" name="a"></message-header>
+          <message-header contact-id="0" name=""></message-header>
           <message-list contact-id="0"></message-list>
           <input-box contact-id="0"></input-box>
         </div>
@@ -68,11 +68,12 @@ class HomePage extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["contact-id"];
+    return ["contact-id", "last-updated"];
   }
 
   connectedCallback() {
     this.setAttribute("contact-id", 0);
+    this.setAttribute("last-updated", new Date().getTime());
   }
 
   disconnectedCallback() {
@@ -96,6 +97,30 @@ class HomePage extends HTMLElement {
       inputBox
         ? inputBox.setAttribute("contact-id", newValue)
         : console.log("input not found");
+    }
+
+    // if (attr === "last-updated") {
+    //   //sort convos
+    // }
+  }
+
+  sortDivs() {
+    const contactListElement = this.shadowRoot.querySelector("#contact-list");
+    const contactDivElements = this.shadowRoot.querySelectorAll("user-contact");
+
+    let toSort = Array.prototype.slice.call(contactDivElements, 0);
+
+    toSort.sort((a, b) => {
+      let timestampA = a.getAttribute("timestamp");
+      let timestampB = b.getAttribute("timestamp");
+
+      return timestampB - timestampA;
+    });
+
+    contactListElement.innerHTML = "";
+
+    for (var a = 0; a < toSort.length; a++) {
+      contactListElement.appendChild(toSort[a]);
     }
   }
 }

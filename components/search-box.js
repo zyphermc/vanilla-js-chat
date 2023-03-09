@@ -78,7 +78,7 @@ export class SearchBox extends HTMLElement {
     this.controller.abort();
   }
 
-  attributeChangedCallback(name, newValue, oldValue) {
+  attributeChangedCallback(name, oldValue, newValue) {
     //
   }
 }

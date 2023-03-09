@@ -83,6 +83,8 @@ export class UserContact extends HTMLElement {
       },
       { signal: this.controller.signal }
     );
+
+    console.log("user-contact connected");
   }
 
   disconnectedCallback() {
@@ -95,6 +97,12 @@ export class UserContact extends HTMLElement {
     if (attr === "last-message") {
       const lastMessageElement = this.shadowRoot.querySelector("#last-message");
       lastMessageElement.innerHTML = newValue;
+
+      const homePage = document.querySelector("home-page");
+
+      homePage
+        ? homePage.setAttribute("last-updated", new Date().getTime())
+        : console.log("homePage not found");
     }
   }
 }
