@@ -87,9 +87,7 @@ export class MessageInfo extends HTMLElement {
     this.controller.abort();
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    console.log(`${name},${oldValue},${newValue}`);
-  }
+  attributeChangedCallback(name, oldValue, newValue) {}
 }
 
 if (

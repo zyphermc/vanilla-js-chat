@@ -1,7 +1,11 @@
-import { Sidebar } from "./side-bar.js";
-import { ChatContainer } from "./chat-container.js";
+import { NavBar } from "./nav-bar.js";
+import { SearchBox } from "./search-box.js";
+import { UserContact } from "./user-contact.js";
+import { MessageList } from "./message-list.js";
+import { MessageHeader } from "./message-header.js";
+import { InputBox } from "./input-box.js";
 
-class Home extends HTMLElement {
+class HomePage extends HTMLElement {
   constructor() {
     super();
 
@@ -15,24 +19,44 @@ class Home extends HTMLElement {
       display: flex;
       align-items: center;
       justify-content: center;
+      
     }
     .home .container {
       border: 1px solid white;
       border-radius: 10px;
-      width: 65%;
+      width: 65%; 
       height: 80%;
       display: flex;
       overflow: hidden;
     }
-    chat-container {
-    flex: 2;
+    .chat {
+      flex: 2;
+      height: 80vh;
+    }
+    .sidebar {
+      flex: 1;
+      background-color: #3e3c61;
+      position: relative;
+      height: 100vh
     }
     </style>
   
     <div class="home">
       <div class="container">
-      <side-bar></side-bar>
-      <chat-container></chat-container>
+        <div class="sidebar">
+          <nav-bar></nav-bar>
+          <search-box></search-box>
+          <div id="contact-list">
+            <user-contact contact-id="0"></user-contact>
+            <user-contact contact-id="1"></user-contact>
+            <user-contact contact-id="2"></user-contact>
+          </div>
+        </div>
+        <div class="chat">
+          <message-header contact-id="0" name="a"></message-header>
+          <message-list contact-id="0"></message-list>
+          <input-box contact-id="0"></input-box>
+        </div>
       </div>
     </div>
         `;
@@ -43,16 +67,38 @@ class Home extends HTMLElement {
     this.controller = new AbortController();
   }
 
-  connectedCallback() {}
+  static get observedAttributes() {
+    return ["contact-id"];
+  }
+
+  connectedCallback() {
+    this.setAttribute("contact-id", 0);
+  }
 
   disconnectedCallback() {
     this.controller.abort();
   }
 
-  attributeChangedCallback(name, newValue, oldValue) {
-    //
+  attributeChangedCallback(attr, oldValue, newValue) {
+    if (newValue === oldValue) return;
+
+    if (attr === "contact-id") {
+      const msgHeader = this.shadowRoot.querySelector("message-header");
+      const msgList = this.shadowRoot.querySelector("message-list");
+      const inputBox = this.shadowRoot.querySelector("input-box");
+
+      msgHeader
+        ? msgHeader.setAttribute("contact-id", newValue)
+        : console.log("header not found");
+      msgList
+        ? msgList.setAttribute("contact-id", newValue)
+        : console.log("list not found");
+      inputBox
+        ? inputBox.setAttribute("contact-id", newValue)
+        : console.log("input not found");
+    }
   }
 }
 
 if (document.createElement("home-page").constructor.__proto__ !== HTMLElement)
-  window.customElements.define("home-page", Home);
+  window.customElements.define("home-page", HomePage);

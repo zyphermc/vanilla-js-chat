@@ -1,3 +1,4 @@
+import { getData } from "../js/store.js";
 import { MessageInfo } from "./message-info.js";
 
 export class MessageList extends HTMLElement {
@@ -16,11 +17,9 @@ export class MessageList extends HTMLElement {
         }
     </style>
 
-
     <div class="messages">
         <message-info message="Hello World" owner="true"></message-info>
         <message-info message="Foobar" owner="false"></message-info>
-        <button id="submit">Add Message</button>
     </div>
       `;
 
@@ -31,35 +30,34 @@ export class MessageList extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [];
+    return ["contact-id"];
   }
 
-  connectedCallback() {
-    const el = this.shadowRoot.getElementById("submit");
-
-    if (el) {
-      el.addEventListener("click", this.on_click.bind(this), {
-        signal: this.controller.signal,
-      });
-    }
-  }
+  connectedCallback() {}
 
   disconnectedCallback() {
     this.controller.abort();
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {}
+  attributeChangedCallback(attr, oldValue, newValue) {
+    if (oldValue === newValue) return;
 
-  on_click(e) {
-    e.preventDefault();
-    this.addMessage("hello", "true");
+    if (attr === "contact-id") {
+      const messages = getData()[this.getAttribute("contact-id")].messages;
+
+      const el = this.shadowRoot.querySelector(".messages");
+      el.innerHTML = "";
+
+      for (let a = 0; a < messages.length; a++) {
+        this.addMessageElement(messages[a].message, messages[a].owner);
+      }
+    }
   }
 
-  addMessage(message, owner) {
+  addMessageElement(message, owner) {
     const myMessage = document.createElement("message-info");
     myMessage.setAttribute("message", message);
     myMessage.setAttribute("owner", owner);
-
     this.shadowRoot.querySelector(".messages").appendChild(myMessage);
   }
 }

@@ -1,5 +1,4 @@
 import { logoutUser } from "../js/authentication.js";
-import { getUser, updateUserDetails } from "../js/updateData.js";
 
 export class NavBar extends HTMLElement {
   constructor() {
@@ -69,10 +68,6 @@ export class NavBar extends HTMLElement {
         signal: this.controller.signal,
       });
     }
-
-    if (elName && elImage) {
-      //updateUserDetails(elName, elImage);
-    }
   }
 
   disconnectedCallback() {
@@ -86,11 +81,6 @@ export class NavBar extends HTMLElement {
   handleLogout(e) {
     e.preventDefault();
     logoutUser();
-  }
-
-  handleGetUser(e) {
-    e.preventDefault();
-    getUser();
   }
 }
 

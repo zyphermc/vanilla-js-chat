@@ -1,3 +1,5 @@
+import { pushMessage } from "../js/store.js";
+
 export class InputBox extends HTMLElement {
   constructor() {
     super();
@@ -48,17 +50,17 @@ export class InputBox extends HTMLElement {
         }
       </style>
 
-        <div class="input">
-            <input id="text-input" type="text" placeholder="Type something..." />
-            <div class="send">
-                <img src="https://www.w3schools.com/images/lamp.jpg" alt="" />
-                <input type="file" id="file" />
-                <label htmlFor="file">
-                    <img src="https://www.w3schools.com/images/lamp.jpg" alt="" />
-                </label>
-                <button id="submit">Send</button>
-            </div>
-        </div>
+      <div class="input">
+          <input id="text-input" type="text" placeholder="Type something..." />
+          <div class="send">
+              <img src="https://www.w3schools.com/images/lamp.jpg" alt="" />
+              <input type="file" id="file" />
+              <label htmlFor="file">
+                  <img src="https://www.w3schools.com/images/lamp.jpg" alt="" />
+              </label>
+              <button id="submit">Send</button>
+          </div>
+      </div>
       `;
 
     const shadow = this.attachShadow({ mode: "open" });
@@ -66,6 +68,10 @@ export class InputBox extends HTMLElement {
 
     this.controller = new AbortController();
   }
+
+  // static get observedAttributes() {
+  //   return ["contact-id"];
+  // }
 
   connectedCallback() {
     const sendBtn = this.shadowRoot.getElementById("submit");
@@ -81,13 +87,34 @@ export class InputBox extends HTMLElement {
     this.controller.abort();
   }
 
-  attributeChangedCallback(name, newValue, oldValue) {
+  attributeChangedCallback(attr, oldValue, newValue) {
     //
   }
 
   handleSend() {
     const input = this.shadowRoot.getElementById("text-input");
-    console.log(input.value);
+
+    if (input) {
+      this.findContactList().setAttribute("timestamp", new Date().getTime());
+      this.findContactList().setAttribute("last-message", input.value);
+
+      pushMessage(this.getAttribute("contact-id"), input.value, true);
+
+      this.previousElementSibling.addMessageElement(
+        input.value,
+        true
+      );
+
+      input.value = "";
+    }
+  }
+
+  findContactList() {
+    return document
+      .querySelector("home-page")
+      .shadowRoot.querySelector(
+        `user-contact[contact-id="${this.getAttribute("contact-id")}"]`
+      );
   }
 }
 
